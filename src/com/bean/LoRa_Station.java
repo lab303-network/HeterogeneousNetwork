@@ -6,17 +6,26 @@ public class LoRa_Station {
 	private int id;
 	private double x;
 	private double y; // 基站的坐标
-	private List<LoRa_Data> datas; //对应终端的数据
-	public LoRa_Station(double x, double y, List<LoRa_Data> datas) {
+	private List<LoRa_Terminal> terminals;
+	public LoRa_Station(double x, double y, List<LoRa_Terminal> terminals) {
 		super();
 		this.x = x;
 		this.y = y;
-		this.datas = datas;
+		this.terminals = terminals;
 	}
 	public LoRa_Station(double x, double y) {
 		super();
 		this.x = x;
 		this.y = y;
+	}	
+	public LoRa_Station() {
+	}
+	public LoRa_Station(int id, double x, double y, List<LoRa_Terminal> terminals) {
+		super();
+		this.id = id;
+		this.x = x;
+		this.y = y;
+		this.terminals = terminals;
 	}
 	public LoRa_Station(int id, double x, double y) {
 		super();
@@ -42,12 +51,13 @@ public class LoRa_Station {
 	public void setY(double y) {
 		this.y = y;
 	}
-	public List<LoRa_Data> getDatas() {
-		return datas;
+	public List<LoRa_Terminal> getTerminals() {
+		return terminals;
 	}
-	public void setDatas(List<LoRa_Data> datas) {
-		this.datas = datas;
+	public void setTerminals(List<LoRa_Terminal> terminals) {
+		this.terminals = terminals;
 	}
+
 
 	
 	

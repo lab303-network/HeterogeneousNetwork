@@ -22,19 +22,6 @@
 
 <mapper namespace="LoraStation">
 
-  <resultMap type="com.bean.LoRa_Station" id="LoRa_StationResult">
-    <id column="id" jdbcType="INTEGER" property="id"/>
-    <result column="x" jdbcType="DOUBLE" property="x"/>
-    <result column="y" jdbcType="DOUBLE" property="y"/>
-  </resultMap>
-  
-    <resultMap type="com.bean.LoRa_Station" id="LoRa_StationResult_withData">
-    <id column="id" jdbcType="INTEGER" property="id"/>
-    <result column="x" jdbcType="DOUBLE" property="x"/>
-    <result column="y" jdbcType="DOUBLE" property="y"/>
-    <collection property="datas" resultMap="LoraData.LoRa_DataResult"></collection>  
-  </resultMap>
-
   <select id="find" resultMap="LoRa_StationResult">
     SELECT x, y FROM LoRa_Station
   </select>
@@ -42,7 +29,39 @@
   <select id="find1" parameterType="INTEGER" resultMap="LoRa_StationResult">
     SELECT id ,x, y FROM LoRa_Station where id=#{id}
   </select>
-
+  
+  <resultMap type="com.bean.LoRa_Station" id="LoRa_StationResult">
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="x" jdbcType="DOUBLE" property="x"/>
+    <result column="y" jdbcType="DOUBLE" property="y"/>
+  </resultMap>
+  
+   <select id="findall1" resultMap="LoRa_StationResultWithTerminal1">
+		SELECT a.id ,a.x,a.y,b.id from LoRa_Station a join LoRa_Terminal b on b.stationId = a.id
+  </select>
+   
+   <resultMap type="com.bean.LoRa_Station" id="LoRa_StationResultWithTerminal1">
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="x" jdbcType="DOUBLE" property="x"/>
+    <result column="y" jdbcType="DOUBLE" property="y"/>
+    <collection property="terminals" ofType="com.bean.LoRa_Terminal">
+    	<id column="id" jdbcType="INTEGER" property="id"/>
+    	<result column="stationId" jdbcType="INTEGER" property="stationId"/>
+    </collection>
+  </resultMap>
+  
+   <select id="findall" parameterType="INTEGER" resultMap="LoRa_StationResultWithTerminal">
+   select d.id,c.stationId as c_id, c.terminalId as t_id, d.snr,d.rssi,d.msg, d.time, d.terminalId, c.c_x,c.c_y
+	from (SELECT a.x c_x,a.y c_y,a.id stationId ,b.id terminalId from LoRa_Station a join LoRa_Terminal b on b.stationId = a.id) as c 
+		join LoRa_Data d on c.terminalId = d.terminalId where c.terminalId = #{terminalId} order by d.id desc limit 5
+  </select>
+   
+  <resultMap type="com.bean.LoRa_Station" id="LoRa_StationResultWithTerminal">
+    <id column="c_id" jdbcType="INTEGER" property="id"/>
+    <result column="c_x" jdbcType="DOUBLE" property="x"/>
+    <result column="c_y" jdbcType="DOUBLE" property="y"/>
+    <collection property="terminals" resultMap="LoraTerminal.LoRa_TerminalResultWithData"></collection>  
+  </resultMap>
 
   <insert id="insert" parameterType="com.bean.LoRa_Station" useGeneratedKeys="false">
     INSERT INTO LoRa_Station

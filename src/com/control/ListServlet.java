@@ -24,7 +24,7 @@ public class ListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//new SerialListener();
+		new SerialListener();
 		request.getRequestDispatcher("/WEB-INF/main.html").forward(request, response);
 	}
 

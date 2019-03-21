@@ -6,7 +6,7 @@ public class LoRa_Data {
 	private double snr;
 	private double rssi;
 	private String msg;
-	private int stationid;
+	private int terminalId;
 	private String time;
 	// 解析串口数据用
 	public LoRa_Data(double snr, double rssi) {
@@ -14,15 +14,19 @@ public class LoRa_Data {
 		this.snr = snr;
 		this.rssi = rssi;
 	}
+	
+	public LoRa_Data() {
+	}
+
 	// 查询用
-	public LoRa_Data(int id, double snr, double rssi, String msg, String time, int stationid) {
+	public LoRa_Data(int id, double snr, double rssi, String msg, String time, int terminalId) {
 		super();
 		this.id = id;
 		this.snr = snr;
 		this.rssi = rssi;
 		this.msg = msg;
 		this.time = time;
-		this.stationid = stationid;
+		this.terminalId = terminalId;
 	}
 	public int getId() {
 		return id;
@@ -48,17 +52,17 @@ public class LoRa_Data {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-	public int getStationid() {
-		return stationid;
-	}
-	public void setStationid(int stationid) {
-		this.stationid = stationid;
-	}
 	public String getTime() {
 		return time;
 	}
 	public void setTime(String time) {
 		this.time = time;
+	}
+	public int getTerminalId() {
+		return terminalId;
+	}
+	public void setTerminalId(int terminalId) {
+		this.terminalId = terminalId;
 	}
 	
 

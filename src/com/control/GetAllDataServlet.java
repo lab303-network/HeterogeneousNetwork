@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bean.LoRa_Data;
+import com.bean.LoRa_Station;
 import com.dao.LoRa_Dao;
 
 import net.sf.json.JSONArray;
@@ -41,14 +42,14 @@ public class GetAllDataServlet extends HttpServlet {
 		
         System.out.println("============");
         String name = request.getParameter("name");
-        System.out.println(name);
         
         // 获取lora相关数据 最新五条
-        List<LoRa_Data> lora_list = new LoRa_Dao().getLoRaData();
+        List<LoRa_Station> lora_list = new LoRa_Dao().getLoRaData();
+        System.out.println(lora_list.size());
         Map<String, List> map = new HashMap();
         map.put("lora", lora_list);
 		JSONArray lora_json = JSONArray.fromObject(map);
-        System.out.println(lora_json);
+		System.out.println(lora_json);
         response.getWriter().write(lora_json.toString());
                 
 	}

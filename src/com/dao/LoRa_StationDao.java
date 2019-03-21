@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.bean.LoRa_Output;
 import com.bean.LoRa_Station;
 import com.db.DbAcess;
 
@@ -17,10 +18,16 @@ public class LoRa_StationDao {
 		try {
 			ss = dba.getSqlSession();
 			//Í¨¹ýssÖ´ÐÐsqlÓï¾ä
-			list = ss.selectList("LoraStation.find");
-			System.out.println(list.get(0).getX());
-			ss.insert("LoraStation.insert",new LoRa_Station(2,3));
-			ss.commit();
+			list = ss.selectList("LoraStation.findall1");
+//			System.out.println(list.get(0).getId());
+//			System.out.println(list.get(0).getX());
+//			System.out.println(list.get(0).getY());
+//			System.out.println(list.get(0).getTerminals().get(0).getId());
+
+
+			System.out.println(list.get(0).getTerminals().get(0).getDatas().get(0).getMsg());
+			//ss.insert("LoraStation.insert",new LoRa_Station(2,3));
+			//ss.commit();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

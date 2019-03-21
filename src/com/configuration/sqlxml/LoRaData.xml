@@ -23,7 +23,7 @@
 <mapper namespace="LoraData">
 
   <select id="list" parameterType="INTEGER" resultMap="LoRa_DataResult">
-    SELECT id ,snr, rssi, msg, time ,station  FROM LoRa_Data where station=#{id} order by id desc limit 5
+    SELECT id ,snr, rssi, msg, time ,terminalId  FROM LoRa_Data where station=#{id} order by id desc limit 5
   </select>
   
    <resultMap type="com.bean.LoRa_Data" id="LoRa_DataResult">
@@ -32,8 +32,9 @@
     <result column="rssi" jdbcType="DOUBLE" property="rssi"/>
     <result column="msg" jdbcType="VARCHAR" property="msg"/>
     <result column="time" jdbcType="VARCHAR" property="time"/>
-    <result column="station" jdbcType="INTEGER" property="stationid"/>
+    <result column="t_id" jdbcType="INTEGER" property="terminalId"/>
   </resultMap>
+
 
   <insert id="insert" parameterType="com.bean.LoRa_Data" useGeneratedKeys="false">
     INSERT INTO LoRa_Data
@@ -41,7 +42,7 @@
     snr,
     rssi,
     msg,
-    station,
+    terminalId,
     time
     )
     VALUES
@@ -49,7 +50,7 @@
     #{snr,jdbcType=DOUBLE},
     #{rssi,jdbcType=DOUBLE},
     #{msg,jdbcType=VARCHAR},
-    #{stationid,jdbcType=INTEGER},
+    #{terminalId,jdbcType=INTEGER},
     #{time,jdbcType=VARCHAR}
     )
   </insert>

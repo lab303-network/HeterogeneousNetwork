@@ -20,11 +20,9 @@ public class LoRa_Dao {
 		try {
 			ss = dba.getSqlSession();
 			//通过ss执行sql语句
-			ls = ss.selectOne("LoraStation.find1",1);//此处的1需要由网页端回传
 			ld.setMsg("Hello");
-			ld.setStationid(ls.getId());
+			ld.setTerminalId(1); //网页端传回
 			ld.setTime(this.getNow());
-			System.out.println(ld.getTime());
 			ss.insert("LoraData.insert",ld);
 			ss.commit();
 			System.out.println("插入数据成功");
@@ -50,14 +48,14 @@ public class LoRa_Dao {
         return cc;
 	}
 	
-	public List<LoRa_Data> getLoRaData(){
+	public List<LoRa_Station> getLoRaData(){
 		DbAcess dba = new DbAcess();
 		SqlSession ss = null;
-		List<LoRa_Data> ls = null;
+		List<LoRa_Station> ls = null;
 		try {
 			ss = dba.getSqlSession();
 			//通过ss执行sql语句
-			ls = ss.selectList("LoraData.list",1);//此处的1需要由网页端回传
+			ls = ss.selectList("LoraStation.findall",1);//此处的1需要由网页端回传
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -3,7 +3,9 @@ package com.control;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import com.bean.LoRa_Station;
 import com.dao.LoRa_Dao;
 import com.dao.LoRa_StationDao;
 import com.tool.SeialProcess;
@@ -32,8 +34,9 @@ public class Test {
 
 
 		//new LoRa_StationDao().queryLoraStationList();
-		new LoRa_Dao().getLoRaData();
-		//new SerialListener();
+        //List<LoRa_Station> lora_list = new LoRa_Dao().getLoRaData();
+        //System.out.println(lora_list);
+		new SerialListener();
 		 
 		
 		
