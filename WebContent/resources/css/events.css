@@ -1,0 +1,49 @@
+/*
+Created by Dyan at 19/3/18 20:09
+*/
+
+body {
+    padding-top: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.font_size_title {
+    font-size: 24px;
+}
+.font_size_tags {
+    font-size: 18px;
+}
+.block_left {
+    /*background: #80bdff;*/
+    width: 60%;
+    float: left;
+}
+.block_right {
+    /*background: #d3d9df;*/
+    width: 39%;
+    float: right;
+}
+.clear {
+    clear:both;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+}
+.table {
+    font-size: 24px;
+}
+.panel {
+    height: 512px;
+    width: 100%;
+    margin-top: 10px;
+    overflow: auto;
+}
+.panel-body {
+    width: 100%;
+    overflow: auto;
+}
+.Chart_container {
+    position: relative;
+    height: 256px;
+    width: 100%;
+}

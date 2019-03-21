@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="异构网络信息平台主页">
+    <meta name="author" content="Dyan">
+    <title>异构网络信息平台</title>
+    <!-- 网页标题左侧显示图标 -->
+    <link rel="icon" href="image/title.ico" type="image/x-icon">
+    <!-- 收藏夹显示图标 -->
+    <link rel="shortcut icon" href="image/title.ico" type="image/x-icon">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/events.css" rel="stylesheet">
+    <script type="text/javascript" src="js/d3.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand font_size_title" href="#"><b>异构网络信息平台</b></a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="main.html" class="font_size_tags">主页</a></li>
+                <li class="active"><a href="#" class="font_size_tags">拓扑图</a></li>
+                <li><a href="help.html" class="font_size_tags">帮助</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="block_left">
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">网络结构
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li id="LoRa_selected"><a>LoRa</a></li>
+            <li id="RFID_selected"><a>RFID</a></li>
+            <li id="ZigBee_selected"><a>ZigBee</a></li>
+        </ul>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body" id="draw"></div>
+    </div>
+    <div class="Chart_container">
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
+<div class="block_right">
+    <table class="table table-striped">
+        <caption>实时状态信息</caption>
+        <thead></thead>
+        <tbody></tbody>
+    </table>
+</div>
+<!-- 清除浮动 -->
+<div class="clear"></div>
+</body>
+<script src="js/jQuery v3.3.1.js"></script>
+<script src="js/Bootstrap v3.3.7.js"></script>
+<script src="js/Chart.bundle.min.js"></script>
+<script src="js/events.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/draw.js"></script>
+</html>
