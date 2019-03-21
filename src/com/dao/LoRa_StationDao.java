@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.bean.LoRa_Output;
 import com.bean.LoRa_Station;
 import com.db.DbAcess;
 
