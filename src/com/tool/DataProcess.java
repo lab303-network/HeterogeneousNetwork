@@ -1,6 +1,12 @@
 package com.tool;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import com.bean.LoRa_Data;
+import com.bean.Sensor;
 import com.bean.Sensor_Data;
 
 public class DataProcess {
@@ -26,18 +32,54 @@ public class DataProcess {
 	 *  29 RSSI
 	 *  0D 0A 0D 0A 换行符
 	 */
-	public Sensor_Data sensordata_process(String str) {
-		
-		
-		return null;
+	public List<Sensor_Data> sensordata_process(List<String> list) {
+		List<Sensor_Data> output = new ArrayList<Sensor_Data>();
+		for (int i = 0; i<list.size();i++)
+		{
+			String str = list.get(i).replaceAll(" ", ""); //去除所有空格
+			String sensor_id = str.substring(0,4);
+			String data = String.valueOf(Integer.parseInt(str.substring(4,str.indexOf("010C")),16));
+			String sensor_addr = str.substring(str.lastIndexOf("010C")+4,str.lastIndexOf("010C")+8);
+			String father_addr = str.substring(str.lastIndexOf("010C")+8,str.lastIndexOf("010C")+12);
+			String rssi = String.valueOf(Integer.parseInt("-"+str.substring(str.indexOf("0D0A")-2,str.indexOf("0D0A")),16));
+			Sensor_Data sd = new Sensor_Data(sensor_id, data, this.getNow(),rssi,new Sensor(sensor_id,sensor_addr,father_addr));
+			
+			// 错误包  --  抛弃
+			//System.out.println(str.length());  30
+			if(str.length() != 30)
+				break;
+			output.add(sd);
+			
+//			System.out.println(sensor_id);
+//			System.out.println(data);
+//			System.out.println(sensor_addr);
+//			System.out.println(father_addr);
+//			System.out.println(rssi);
+		}
+		return output;
+	}
+	
+	public String getNow() {
+		//创建一个日期对象
+        Date d=new Date();
+        /*//创建一个格式化对象
+        SimpleDateFormat sdf=new SimpleDateFormat();
+        System.out.println(sdf);*/
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //格式化为日期/时间字符串
+        String cc=sdf.format(d);
+        return cc;
 	}
 	
 	
 	
-	
-	
-//	public static void main(String[] args) {
-//		new DataProcess().loradata_process("SNR：8  RSSI: -33.874800");
-//	}
+	public static void main(String[] args) {
+		//new DataProcess().loradata_process("SNR：8  RSSI: -33.874800");
+//		List<String> list = new ArrayList<String>();
+//		list.add("BB 0B 01 43 01 0C CC 4B 00 00 27 0D 0A 0D 0A");
+//		new DataProcess().sensordata_process(list);
+//		System.out.println(Integer.parseInt("0143",16));
+
+	}
 }
 

@@ -4,17 +4,37 @@ import java.util.List;
 
 public class Sensor {
 	private int id;
-	private String type;
-	private String name;
 	private String sensor_id;
-	private String father_id;
-	private List<Sensor> list;
-	public Sensor(String type, String name, String sensor_id, String father_id) {
+	private String sensor_addr;
+	private String father_addr;
+	private double x;
+	private double y;
+	private int isLeave;
+	public Sensor() {
 		super();
-		this.type = type;
-		this.name = name;
+		// TODO Auto-generated constructor stub
+	}
+	public Sensor(int id, String sensor_id, String sensor_addr, String father_addr) {
+		super();
+		this.id = id;
 		this.sensor_id = sensor_id;
-		this.father_id = father_id;
+		this.sensor_addr = sensor_addr;
+		this.father_addr = father_addr;
+	}
+	public Sensor(String sensor_id, String sensor_addr, String father_addr) {
+		super();
+		this.sensor_id = sensor_id;
+		this.sensor_addr = sensor_addr;
+		this.father_addr = father_addr;
+	}
+	public Sensor(String sensor_id, String sensor_addr, String father_addr, double x, double y, int isLeave) {
+		super();
+		this.sensor_id = sensor_id;
+		this.sensor_addr = sensor_addr;
+		this.father_addr = father_addr;
+		this.x = x;
+		this.y = y;
+		this.isLeave = isLeave;
 	}
 	public int getId() {
 		return id;
@@ -22,35 +42,40 @@ public class Sensor {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	public String getSensor_id() {
 		return sensor_id;
 	}
 	public void setSensor_id(String sensor_id) {
 		this.sensor_id = sensor_id;
 	}
-	public String getFather_id() {
-		return father_id;
+	public String getSensor_addr() {
+		return sensor_addr;
 	}
-	public void setFather_id(String father_id) {
-		this.father_id = father_id;
+	public void setSensor_addr(String sensor_addr) {
+		this.sensor_addr = sensor_addr;
 	}
-	public List<Sensor> getList() {
-		return list;
+	public String getFather_addr() {
+		return father_addr;
 	}
-	public void setList(List<Sensor> list) {
-		this.list = list;
+	public void setFather_addr(String father_addr) {
+		this.father_addr = father_addr;
 	}
-	
+	public double getX() {
+		return x;
+	}
+	public void setX(double x) {
+		this.x = x;
+	}
+	public double getY() {
+		return y;
+	}
+	public void setY(double y) {
+		this.y = y;
+	}
+	public int getIsLeave() {
+		return isLeave;
+	}
+	public void setIsLeave(int isLeave) {
+		this.isLeave = isLeave;
+	}
 }

@@ -49,6 +49,8 @@
     <mapper resource="com/configuration/sqlxml/LoRaStation.xml"/>
     <mapper resource="com/configuration/sqlxml/LoRaData.xml"/>
     <mapper resource="com/configuration/sqlxml/LoRaTerminal.xml"/>
+    <mapper resource="com/configuration/sqlxml/SensorData.xml"/>
+    
   </mappers>
 
 </configuration>

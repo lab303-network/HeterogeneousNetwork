@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+       Copyright 2009-2016 the original author or authors.
+
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+
+-->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SensorData">
+
+  	<select id="list" parameterType="String" resultMap="LoRa_SensorResult">
+		select  a.sensor_id, a.data, a.rssi, a.time,b.x,b.y
+			from sensor_data a left join sensor_station b on a.sensor_id = b.sensor_id
+				where a.sensor_id = #{sensor_id} ORDER BY a.id desc limit 1
+	</select>
+  
+   <resultMap type="com.bean.Sensor_Data" id="LoRa_SensorResult">
+    <id column="d_id" jdbcType="INTEGER" property="id"/>
+    <result column="sensor_id" jdbcType="VARCHAR" property="sensor_id"/>
+    <result column="data" jdbcType="VARCHAR" property="data"/>
+    <result column="time" jdbcType="VARCHAR" property="time"/>
+    <result column="rssi" jdbcType="VARCHAR" property="rssi"/>   
+    <association property="sensor" javaType ="com.bean.Sensor">
+    	<id column="id" jdbcType="INTEGER" property="id"/>
+    	<result column="type" jdbcType="VARCHAR" property="type"/>
+    	<result column="name" jdbcType="VARCHAR" property="name"/>
+   	 	<result column="sensor_id" jdbcType="VARCHAR" property="sensor_id"/>
+   	 	<result column="father_id" jdbcType="VARCHAR" property="father_id"/>
+   	 	<result column="x" jdbcType="DOUBLE" property="x"/>
+   	 	<result column="y" jdbcType="DOUBLE" property="y"/> 	 	
+    </association>
+   </resultMap>
+   
+   
+   <select id="listsensorid" resultMap="SensorId">
+    select sensor_id from sensor_station
+  </select>
+  
+   <resultMap type="String" id="SensorId">
+   	 	<result column="sensor_id" jdbcType="VARCHAR" property="sensor_id"/>
+   </resultMap>
+    
+    
+   <select id="listtopo" resultMap="SensorTopo">
+    select  sensor_id, sensor_addr,father_addr,x,y from sensor_station where isLeave = 0
+  </select>
+  
+   <resultMap type="com.bean.Sensor" id="SensorTopo">
+   	 	<result column="sensor_id" jdbcType="VARCHAR" property="sensor_id"/>
+   	 	<result column="sensor_addr" jdbcType="VARCHAR" property="sensor_addr"/>
+   	 	<result column="father_addr" jdbcType="VARCHAR" property="father_addr"/>
+   	 	<result column="x" jdbcType="DOUBLE" property="x"/>
+   	 	<result column="y" jdbcType="DOUBLE" property="y"/>
+   </resultMap>
+    
+    
+   <insert id="insert" parameterType="com.bean.Sensor_Data">
+    INSERT INTO Sensor_Data
+    (
+    sensor_id,
+    data,
+    time,
+    rssi
+    )
+    VALUES
+    (
+    #{sensor_id,jdbcType=VARCHAR},
+    #{data,jdbcType=VARCHAR},
+    #{time,jdbcType=VARCHAR},
+    #{rssi,jdbcType=VARCHAR}
+    )
+  </insert>
+  
+  <insert id="insertnewsensor" parameterType="com.bean.Sensor">
+    INSERT INTO Sensor_station    
+    (
+    sensor_id,
+    sensor_addr,
+    father_addr
+    )
+    VALUES
+    (
+    #{sensor_id,jdbcType=VARCHAR},
+    #{sensor_addr,jdbcType=VARCHAR},
+    #{father_addr,jdbcType=VARCHAR}
+    )
+  </insert>
+  
+  
+  <update id="updatesensor" parameterType="com.bean.Sensor">
+   update sensor_station 
+            set sensor_addr = #{sensor_addr},
+                father_addr = #{father_addr},
+                isLeave = 0
+    where sensor_id = #{sensor_id}
+  </update>
+  
+   <update id="updateforleave" parameterType="String">
+   update sensor_station 
+            set isLeave = 1
+    where sensor_id = #{sensor_id}
+  </update>
+    
+  
+</mapper>

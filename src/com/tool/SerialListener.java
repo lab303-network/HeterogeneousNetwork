@@ -21,6 +21,7 @@ public class SerialListener implements SerialPortEventListener{
 		
 		if (port != null) {
 			try {
+				System.out.println("正在监听串口");
 	            //向串口添加事件监听对象。
 				port.addEventListener(this);
 	            //设置当端口有可用数据时触发事件，此设置必不可少。

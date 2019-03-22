@@ -6,12 +6,15 @@ import java.util.Date;
 import java.util.List;
 
 import com.bean.LoRa_Station;
+import com.bean.Sensor_Data;
 import com.dao.LoRa_Dao;
 import com.dao.LoRa_StationDao;
+import com.dao.Sensor_Dao;
 import com.tool.SeialProcess;
 import com.tool.SerialListener;
 
 import gnu.io.SerialPort;
+import net.sf.json.JSONArray;
 
 public class Test {
 	public static void main(String[] args) throws InterruptedException {
@@ -36,7 +39,9 @@ public class Test {
 		//new LoRa_StationDao().queryLoraStationList();
         //List<LoRa_Station> lora_list = new LoRa_Dao().getLoRaData();
         //System.out.println(lora_list);
-		new SerialListener();
+		//new SerialListener();
+		
+
 		 
 		
 		

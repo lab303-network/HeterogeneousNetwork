@@ -6,28 +6,53 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import com.bean.Sensor_Data;
+import com.dao.Sensor_Dao;
 
 public class SocketListener {
-	public String readSocket() {
+	public List<String> readSocket() {
 		String ip = "192.168.16.254";
 		int port = 8080;	
+		String out = null;
+		List<String> list = new ArrayList<String>();
+		List<String> list_check = new ArrayList<String>();
+		List<String> leave = new ArrayList<String>();
 		try {
 			Socket socket = new Socket(ip,port);
-	        InputStream is = socket.getInputStream();
+			System.out.println("正在监听网口");
+	        InputStream is = socket.getInputStream();	        
+	        long startTime =  System.currentTimeMillis();
 			while(true)
 			{
-				byte[] arr = new byte[15];
+				byte[] arr = new byte[1024];
 		        int len = is.read(arr);
-		        System.out.println(arr.length);
-		        System.out.println(this.BinaryToHexString(arr));
+		        out = this.BinaryToHexString(Arrays.copyOf(arr, len));
 		        
-		        try {
-					Thread.sleep(6000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		        //测试用
+		        //System.out.println(out);
+		        
+		        list.add(out);
+		        list_check.add(out);		     
+		        long endTime =  System.currentTimeMillis();
+		        long usedTime = (endTime-startTime)/1000;
+		        if (usedTime > 2) {
+		        	// 每隔3秒记录一次
+		        	new Sensor_Dao().insertSensorData(new DataProcess().sensordata_process(list));
+		        	list.clear();
+		        }
+		        if (usedTime > 6) {
+		        	// 每隔6秒自查一次，是否有终端离开
+		        	leave = new Sensor_Dao().isSensorOut(list_check);
+		        	for (int i = 0; i < leave.size(); i++) {
+						System.out.println(leave.get(i)+"离开了");
+					}
+		        	list_check.clear();
+		        	startTime = endTime;
+		        }
 			}	
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -36,9 +61,9 @@ public class SocketListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return null;
 	}
+	
 	
 	public static String BinaryToHexString(byte[] bytes) {
 	    String hexStr = "0123456789ABCDEF";

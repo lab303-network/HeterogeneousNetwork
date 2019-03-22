@@ -53,7 +53,7 @@
    <select id="findall" parameterType="INTEGER" resultMap="LoRa_StationResultWithTerminal">
    select d.id,c.stationId as c_id, c.terminalId as t_id, d.snr,d.rssi,d.msg, d.time, d.terminalId, c.c_x,c.c_y
 	from (SELECT a.x c_x,a.y c_y,a.id stationId ,b.id terminalId from LoRa_Station a join LoRa_Terminal b on b.stationId = a.id) as c 
-		join LoRa_Data d on c.terminalId = d.terminalId where c.terminalId = #{terminalId} order by d.id desc limit 5
+		join LoRa_Data d on c.terminalId = d.terminalId where c.terminalId = #{terminalId} order by d.id desc limit 1
   </select>
    
   <resultMap type="com.bean.LoRa_Station" id="LoRa_StationResultWithTerminal">
