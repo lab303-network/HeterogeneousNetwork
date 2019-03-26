@@ -9,9 +9,18 @@ var Interface = {
      * @param callback
      */
     gainJSON: function (url, callback) {
-        $.getJSON(url, function (obj) {
-            callback(obj);
-        });
+         $.ajax({
+             type: "get",
+             url: url,
+             dataType: "JSON",
+             success: function (data) {
+                 //alert("success");
+                 callback(data)
+             },
+         });
+//        $.getJSON(url, function (data) {
+//            callback(data);
+//        });
     },
     /*
      * @param url
@@ -30,18 +39,18 @@ var Interface = {
             success: s_callback,
             complete: c_callback
         });
-    }
+    },
 };
 
 /*网络传输状态信息*/
 var NetWork = {
-    getTestData: function (callback) {
-        Interface.gainJSON('getalldata.action?name=link', callback);
-    },      //
+    getTestData: function (callback) { 
+        Interface.gainJSON('getalldata.action?name=zhihao', callback);
+    },      //预留get
     rName: function (Name, callback) {
         Interface.gainJSON('/Name?Name=' + Name, callback);
-    },      //
+    },      //预留get+参数
     rResult: function (data) {
-        Interface.sentJSON('/returnResult', data, App.beforex, App.xResult, util.voidFunction);
-    },      //
+        Interface.sentJSON('/returnResult', data, App.beforex, testFunc, util.voidFunction);
+    },      //预留post
 };

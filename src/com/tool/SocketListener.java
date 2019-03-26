@@ -48,7 +48,7 @@ public class SocketListener {
 		        	// 每隔6秒自查一次，是否有终端离开
 		        	leave = new Sensor_Dao().isSensorOut(list_check);
 		        	for (int i = 0; i < leave.size(); i++) {
-						System.out.println(leave.get(i)+"离开了");
+						//System.out.println(leave.get(i)+"离开了");
 					}
 		        	list_check.clear();
 		        	startTime = endTime;
