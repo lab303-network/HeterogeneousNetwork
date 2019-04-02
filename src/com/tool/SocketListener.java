@@ -23,7 +23,7 @@ public class SocketListener {
 		List<String> leave = new ArrayList<String>();
 		try {
 			Socket socket = new Socket(ip,port);
-			System.out.println("正在监听网口");
+			System.out.println("正在监听Zigbee网口");
 	        InputStream is = socket.getInputStream();	        
 	        long startTime =  System.currentTimeMillis();
 			while(true)

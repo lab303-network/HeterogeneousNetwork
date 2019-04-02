@@ -17,6 +17,7 @@ import com.bean.LoRa_Data;
 import com.bean.LoRa_Station;
 import com.bean.Sensor_Data;
 import com.dao.LoRa_Dao;
+import com.dao.Rfid_Dao;
 import com.dao.Sensor_Dao;
 
 import net.sf.json.JSON;
@@ -61,6 +62,10 @@ public class GetAllDataServlet extends HttpServlet {
         ArrayList<ArrayList<String>> topo_data = new Sensor_Dao().getTopo();
         map.put("zigbee", sensor_data);
         map.put("zigbeeTopo", topo_data);
+        
+        // 获取Rfid数据，如果没有则返回空
+        List<String> rfid_data = new Rfid_Dao().listRfid();
+        map.put("rfid", rfid_data);
         
         JSONObject jsonO = JSONObject.fromObject(map);
 		//JSONArray lora_json = JSONArray.fromObject(map);

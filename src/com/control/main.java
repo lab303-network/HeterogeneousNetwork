@@ -38,6 +38,8 @@ public class main extends HttpServlet {
 				new SocketListener().readSocket();
 			}
 		}).start();
+		
+		
 	}
 
 	/**
