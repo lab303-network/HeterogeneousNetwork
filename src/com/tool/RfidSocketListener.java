@@ -17,8 +17,10 @@ import com.bean.Sensor_Data;
 import com.dao.Rfid_Dao;
 import com.dao.Sensor_Dao;
 
+// RFID socket
 public class RfidSocketListener {
 	public List<String> readSocket() {
+		// 此处作为rfid的客户端
 		// 设成静态地址192.168.1.100，连接到TCP server：192.168.1.190:6000
 		String ip = "192.168.1.190";
 		int port = 6000;	

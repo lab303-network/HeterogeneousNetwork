@@ -16,9 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.bean.LoRa_Data;
 import com.bean.LoRa_Station;
 import com.bean.Sensor_Data;
+import com.bean.UWB_Data;
 import com.dao.LoRa_Dao;
 import com.dao.Rfid_Dao;
 import com.dao.Sensor_Dao;
+import com.dao.UWB_Dao;
 
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
@@ -67,12 +69,21 @@ public class GetAllDataServlet extends HttpServlet {
         List<String> rfid_data = new Rfid_Dao().listRfid();
         map.put("rfid", rfid_data);
         
+        
+        // 获取UWB数据，如果没有则返回空
+        List<UWB_Data> uwb_list = new ArrayList<UWB_Data>();
+        UWB_Data uwb_data = new UWB_Dao().getOneUWBData();
+        uwb_list.add(uwb_data);
+        map.put("uwb", uwb_list);
+        
+        
         JSONObject jsonO = JSONObject.fromObject(map);
 		//JSONArray lora_json = JSONArray.fromObject(map);
 		
-		//System.out.println(jsonO);
+		System.out.println(jsonO);
 		PrintWriter writer = response.getWriter(); 
 		writer.write(jsonO.toString());
+        uwb_list.clear();
 		writer.close(); 
 		response.flushBuffer();  
 	}

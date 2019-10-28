@@ -8,7 +8,11 @@ import java.util.List;
 import com.bean.LoRa_Data;
 import com.bean.Sensor;
 import com.bean.Sensor_Data;
-
+/**
+ * target:对接收到的zigbee16位进制数进行处理
+ * @author limk
+ *
+ */
 public class DataProcess {
 	public LoRa_Data loradata_process(String str) {
 		//SNR：8  RSSI: -33.874800
